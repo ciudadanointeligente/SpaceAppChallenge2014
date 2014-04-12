@@ -37,7 +37,8 @@ class LineCase(TestCase):
     def test_line_attr(self):
         '''get attribute'''
         actualdate = now()
-        line = Line.objects.create(raw=line_raw, timestamp=actualdate, cdata='Waiting 0.964 seconds for subscan 19 to start.')
+        line = Line.objects.create(raw=line_raw, timestamp=actualdate, cdata='Waiting 0.964 seconds for subscan 19 to start.', sourceobject='CONTROL/Array014')
         self.assertEquals(line.raw, line_raw)
         self.assertEquals(line.timestamp, actualdate)
         self.assertEquals(line.cdata, 'Waiting 0.964 seconds for subscan 19 to start.')
+        self.assertEquals(line.sourceobject, 'CONTROL/Array014')
