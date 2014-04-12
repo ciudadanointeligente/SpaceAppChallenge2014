@@ -105,3 +105,13 @@ class ExecBlockCaseTestCase(TestCase):
 
         self.assertEquals(message_started_ev.__str__(), '<debug file="alma.Control.Array.ArrayStateBase" host="gas01" line="887" logid="113150" process="CONTROL/ACC/javaContainer" routine="sendExecBlockStartedEvent" sourceobject="CONTROL/Array016" thread="RequestProcessor-32200" timestamp="2014-04-03T03:01:41.969"><![CDATA[Sending ExecBlockStartedEvent]]></debug>')
 
+    def test_get_endEvent(self):
+        #sendExecBlockEndedEvent
+        soup = BeautifulSoup(lines)
+        # message_ended_ev =  ''
+
+        for message in soup.findAll(routine="sendExecBlockEndedEvent"):
+            message_ended_ev = message
+
+        self.assertEquals(message_ended_ev.__str__(), '<debug file="alma.Control.Array.ArrayStateBase" host="gas01" line="964" logid="108664" process="CONTROL/ACC/javaContainer" routine="sendExecBlockEndedEvent" sourceobject="CONTROL/Array014" thread="CONTROL/Array014-1" timestamp="2014-04-03T02:40:25.369"><![CDATA[Sending ExecBlockEndedEvent]]></debug>')
+
