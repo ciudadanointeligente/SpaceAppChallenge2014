@@ -8,8 +8,9 @@ class LogsParser(object):
         line = Line()
         line.raw = line_raw
         line_process = BeautifulSoup(line_raw)
-        line.cdata = line_process.get_text()
         element = line_process.children.next()
+        line.cdata = element.get_text()
         line.timestamp = dateutil.parser.parse(element['timestamp'])
+        line.sourceobject = element['sourceobject']
 
         return line

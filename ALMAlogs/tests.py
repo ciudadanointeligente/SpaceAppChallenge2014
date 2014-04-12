@@ -40,6 +40,7 @@ class LogParserCase(TestCase):
         self.assertEquals(line.timestamp.hour, 1) # 2014-04-03T01:46:02.972
         self.assertEquals(line.timestamp.minute, 46) # 2014-04-03T01:46:02.972
         self.assertEquals(line.timestamp.second, 02) # 2014-04-03T01:46:02.972
+        self.assertEquals(line.sourceobject, 'CONTROL/Array014')
 
 
 class LineCase(TestCase):
