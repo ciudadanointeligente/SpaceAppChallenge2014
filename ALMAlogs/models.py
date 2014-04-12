@@ -6,3 +6,7 @@ class Line(models.Model):
     timestamp = models.DateTimeField()
     cdata = models.TextField()
     sourceobject = models.CharField(max_length=512)
+    execblock = models.ForeignKey('ExecBlock', null=True)
+
+class ExecBlock(models.Model):
+    uid = models.TextField()

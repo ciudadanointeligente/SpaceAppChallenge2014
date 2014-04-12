@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from .models import Line
+from .models import ExecBlock
 from .parser import LogsParser
 from datetime import datetime
 from django.utils.timezone import now
@@ -63,3 +64,22 @@ class LineCase(TestCase):
         self.assertEquals(line.timestamp, actualdate)
         self.assertEquals(line.cdata, 'Waiting 0.964 seconds for subscan 19 to start.')
         self.assertEquals(line.sourceobject, 'CONTROL/Array014')
+
+    def test_line_has_exec_block(self):
+        ''' A line has an exec block'''
+        obs = ExecBlock.objects.create(uid='wid_')
+        actualdate = now()
+        line = Line.objects.create(raw=line_raw, \
+            timestamp=actualdate, \
+            cdata='Waiting 0.964 seconds for subscan 19 to start.', sourceobject='CONTROL/Array014',\
+            execblock = obs)
+        self.assertTrue(line)
+        self.assertEquals(line.execblock, obs)
+
+
+class ExecBlockCaseTestCase(TestCase):
+    def test_execblock_attr(self):
+        '''get execblock attributes'''
+        obs = ExecBlock.objects.create(uid='wid_')
+        self.assertTrue(obs)
+        self.assertEquals(obs.uid, 'wid_')
