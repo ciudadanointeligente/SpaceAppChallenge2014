@@ -8,9 +8,20 @@ from .parser import LogsParser
 from datetime import datetime
 from django.utils.timezone import now
 from bs4 import BeautifulSoup
+import os
 
 # Create your tests here.
 line_raw = '<Debug TimeStamp="2014-04-03T01:46:02.972" File="alma.Control.ObservingModes.LocalOscilatorThread"  Line="98" Routine="run" Host="gas01" Process="CONTROL/ACC/javaContainer" SourceObject="CONTROL/Array014" Thread="Thread-26724581" LogId="95269" Audience="Developer"><![CDATA[Waiting 0.964 seconds for subscan 19 to start.]]></Debug>'
+
+def read_template_as_string(path, file_source_path=__file__):
+    script_dir = os.path.dirname(file_source_path)
+    result = ''
+    with open(os.path.join(script_dir, path), 'r') as f:
+       result = f.read()
+
+    return result
+
+lines = read_template_as_string('fixtures/block.xml')
 
 class IndexTextCase(TestCase):
     def setUp(self):
@@ -83,3 +94,14 @@ class ExecBlockCaseTestCase(TestCase):
         obs = ExecBlock.objects.create(uid='wid_')
         self.assertTrue(obs)
         self.assertEquals(obs.uid, 'wid_')
+
+    def test_get_startEvent(self):
+        #sendExecBlockStartedEvent
+        soup = BeautifulSoup(lines)
+        message_started_ev =  ''
+
+        for message in soup.findAll(routine="sendExecBlockStartedEvent"):
+            message_started_ev = message
+
+        self.assertEquals(message_started_ev.__str__(), '<debug file="alma.Control.Array.ArrayStateBase" host="gas01" line="887" logid="113150" process="CONTROL/ACC/javaContainer" routine="sendExecBlockStartedEvent" sourceobject="CONTROL/Array016" thread="RequestProcessor-32200" timestamp="2014-04-03T03:01:41.969"><![CDATA[Sending ExecBlockStartedEvent]]></debug>')
+
