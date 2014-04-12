@@ -3,6 +3,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from .models import Line
+from datetime import datetime
+from django.utils.timezone import now
 
 # Create your tests here.
 line_raw = '<Debug TimeStamp="2014-04-03T01:46:02.972" File="alma.Control.ObservingModes.LocalOscilatorThread"  Line="98" Routine="run" Host="gas01" Process="CONTROL/ACC/javaContainer" SourceObject="CONTROL/Array014" Thread="Thread-26724581" LogId="95269" Audience="Developer"><![CDATA[Waiting 0.964 seconds for subscan 19 to start.]]></Debug>'
@@ -34,5 +36,8 @@ class LineCase(TestCase):
 
     def test_line_attr(self):
         '''get attribute'''
-        line = Line.objects.create(raw=line_raw)
+        actualdate = now()
+        line = Line.objects.create(raw=line_raw, timestamp=actualdate, cdata='Waiting 0.964 seconds for subscan 19 to start.')
         self.assertEquals(line.raw, line_raw)
+        self.assertEquals(line.timestamp, actualdate)
+        self.assertEquals(line.cdata, 'Waiting 0.964 seconds for subscan 19 to start.')
