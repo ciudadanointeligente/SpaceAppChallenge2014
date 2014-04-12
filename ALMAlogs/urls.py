@@ -8,6 +8,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'SpaceAppChallenge2014.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('ALMAlogs.urls')),
+    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', TemplateView.as_view(template_name = 'index.html'), name='home'),
 )
