@@ -60,7 +60,7 @@ class LogParserCase(TestCase):
         self.assertEquals(line.timestamp.second, 02) # 2014-04-03T01:46:02.972
         self.assertEquals(line.sourceobject, 'CONTROL/Array014')
         self.assertEquals(line.routine, 'run')
-        self.assertEquals(line.type, 'debug')
+        self.assertEquals(line.tag, 'debug')
 
 
 class LineCase(TestCase):
@@ -72,13 +72,13 @@ class LineCase(TestCase):
     def test_line_attr(self):
         '''get attribute'''
         actualdate = now()
-        line = Line.objects.create(raw=line_raw, timestamp=actualdate, cdata='Waiting 0.964 seconds for subscan 19 to start.', sourceobject='CONTROL/Array014', routine='run', type='debug')
+        line = Line.objects.create(raw=line_raw, timestamp=actualdate, cdata='Waiting 0.964 seconds for subscan 19 to start.', sourceobject='CONTROL/Array014', routine='run', tag='debug')
         self.assertEquals(line.raw, line_raw)
         self.assertEquals(line.timestamp, actualdate)
         self.assertEquals(line.cdata, 'Waiting 0.964 seconds for subscan 19 to start.')
         self.assertEquals(line.sourceobject, 'CONTROL/Array014')
         self.assertEquals(line.routine, 'run')
-        self.assertEquals(line.type, 'debug')
+        self.assertEquals(line.tag, 'debug')
 
     def test_line_has_exec_block(self):
         ''' A line has an exec block'''
