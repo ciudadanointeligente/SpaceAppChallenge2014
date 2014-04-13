@@ -7,6 +7,8 @@ class Line(models.Model):
     cdata = models.TextField()
     sourceobject = models.CharField(max_length=512)
     execblock = models.ForeignKey('ExecBlock', null=True)
+    routine = models.TextField()
+    type = models.TextField()
 
 class ExecBlock(models.Model):
     uid = models.TextField()

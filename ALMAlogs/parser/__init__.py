@@ -11,5 +11,7 @@ class LogsParser(object):
         line.cdata = element.get_text()
         line.timestamp = dateutil.parser.parse(element['timestamp'])
         line.sourceobject = element['sourceobject']
+        line.routine = element['routine']
+        line.type = element.name
 
         return line
