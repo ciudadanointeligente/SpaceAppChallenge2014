@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413103250) do
+ActiveRecord::Schema.define(version: 20140413153418) do
 
   create_table "logs", force: true do |t|
     t.text     "raw"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 20140413103250) do
     t.text     "source_object"
     t.text     "routine"
     t.text     "tag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "observation_id"
+  end
+
+  add_index "logs", ["observation_id"], name: "index_logs_on_observation_id"
+
+  create_table "observations", force: true do |t|
+    t.text     "source_object"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

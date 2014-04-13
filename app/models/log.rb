@@ -1,13 +1,16 @@
 class Log < ActiveRecord::Base
+  belongs_to :observation
+  
   def self.import_data file
     file = File.open(file)
     xml = Nokogiri::XML file
     file.close
-    ['Debug','Delouse','Info'].each do |tag|
+    ['Debug','Delouse','Info','Error','Warning'].each do |tag|
       xml.css(tag).each do |node|
-        create_log_from_node node
+        log = create_log_from_node node
       end
     end
+    Observation.index_observations
   end
   def self.create_log_from_node node
       log = Log.new

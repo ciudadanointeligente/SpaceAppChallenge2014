@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Source object:
+  = @observation.source_object
+
+= link_to 'Edit', edit_observation_path(@observation)
+\|
+= link_to 'Back', observations_path
