@@ -1,9 +1,39 @@
 %p#notice= notice
 
-%p
-  %b Source object:
-  = @observation.source_object
+%h1.content-header Listing logs
 
-= link_to 'Edit', edit_observation_path(@observation)
-\|
-= link_to 'Back', observations_path
+%table.table.table-striped
+  %tr
+    %th
+      Start observation
+
+%table.table.table-striped
+  %tr
+    %th
+      Observation preparation
+
+    %tr
+      = @observation.logs[0].timestamp
+    %tr
+      = @observation.logs[0].tag
+
+    %tr
+      = @observation.logs[0].source_object
+
+    %tr
+      = @observation.logs[0].cdata
+
+%table.table.table-striped
+  %tr
+    %th
+      Scan
+
+%table.table.table-striped
+  %tr
+    %th
+      Subscan
+
+%table.table.table-striped
+  %tr
+    %th
+      End observation

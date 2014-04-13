@@ -1,3 +1,4 @@
+
 class Log < ActiveRecord::Base
   belongs_to :observation
   
@@ -9,6 +10,9 @@ class Log < ActiveRecord::Base
     ['Debug','Delouse','Info','Error','Warning'].each do |tag|
       xml.css(tag).each do |node|
         log = create_log_from_node node
+        if log.nil?
+          next
+        end
         if log.cdata.include? "observing mode starting up"
           observation = Observation.new
           observation.logs = []
@@ -45,7 +49,17 @@ class Log < ActiveRecord::Base
       log.cdata = node.text
       log.routine = node['Routine']
       log.tag = node.name
-      log.save
-      return log
+      filters = [
+        /observing mode starting/,
+        /observing mode shutting down/
+      ]
+
+      filters.each do |filter|
+        if filter.match(node.text)
+          log.save
+          return log
+        end
+      end
+      return nil
   end
 end

@@ -5,7 +5,10 @@ describe Observation do
     it 'asdf' do
       Log.import_data "./spec/fixtures/chico.xml"
       obs = Observation.first
-      obs.logs.count.should eql 11
+      obs.logs.count.should eql 2
+
     end
+
+
   end
 end
