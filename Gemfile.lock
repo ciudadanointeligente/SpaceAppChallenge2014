@@ -241,6 +241,7 @@ DEPENDENCIES
   html2haml
   jbuilder (~> 1.2)
   jquery-rails
+  nokogiri
   pry-rails
   pry-rescue
   quiet_assets

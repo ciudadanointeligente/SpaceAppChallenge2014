@@ -1,0 +1,29 @@
+%h1 Listing logs
+
+%table
+  %tr
+    %th Raw
+    %th Timestamp
+    %th Cdata
+    %th Source object
+    %th Routine
+    %th Tag
+    %th
+    %th
+    %th
+
+  - @logs.each do |log|
+    %tr
+      %td= log.raw
+      %td= log.timestamp
+      %td= log.cdata
+      %td= log.source_object
+      %td= log.routine
+      %td= log.tag
+      %td= link_to 'Show', log
+      %td= link_to 'Edit', edit_log_path(log)
+      %td= link_to 'Destroy', log, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Log', new_log_path

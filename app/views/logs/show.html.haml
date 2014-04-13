@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Raw:
+  = @log.raw
+%p
+  %b Timestamp:
+  = @log.timestamp
+%p
+  %b Cdata:
+  = @log.cdata
+%p
+  %b Source object:
+  = @log.source_object
+%p
+  %b Routine:
+  = @log.routine
+%p
+  %b Tag:
+  = @log.tag
+
+= link_to 'Edit', edit_log_path(@log)
+\|
+= link_to 'Back', logs_path
