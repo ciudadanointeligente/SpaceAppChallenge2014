@@ -5,7 +5,7 @@ class Observation < ActiveRecord::Base
       observation_logs = []
       in_between_logs = false
       Log.where(source_object: s).order(timestamp: :desc).each do |log|
-        if log.routine == "sendExecBlockEndedEvent"
+        if log.cdata.include? "observing mode starting"
           in_between_logs = true
         elsif log.routine == "sendExecBlockStartedEvent"
           observation_logs << log
