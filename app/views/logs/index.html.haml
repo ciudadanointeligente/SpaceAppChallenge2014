@@ -2,19 +2,34 @@
 
 %table.table.table-striped
   %tr
-    %th Timestamp
-    %th Tag
-    %th Routine
-    %th Cdata
+    %th
+      Start observation
 
-  - @logs.each do |log|
+%table.table.table-striped
+  %tr
+    %th
+      Observation preparation
+
+%table.table.table-striped
+  %tr
+    %th
+      Scan
+
+%table.table.table-striped
+  %tr
+    %th
+      Subscan
+
+%table.table.table-striped
+  %tr
+    %th
+      End observation
+
+/
+  %table.table.table-striped
     %tr
-      %td{nowrap: 'nowrap'}= log.timestamp
-      %td= log.tag
-      %td
-        - if log.routine == 'sendExecBlockStartedEvent' || log.routine == 'sendExecBlockEndedEvent'
-          %strong=log.routine
-        - else
-          =log.routine
-      %td{nowrap: 'nowrap'}
-        = log.cdata.force_encoding('UTF-8').encode('UTF-16', :invalid => :replace, :replace => '?').encode('UTF-8') if ! Nokogiri::XML(log.cdata.to_s).errors.empty?
+      %th Timestamp
+      %th Tag
+      %th Source Obj
+      %th Cdata
+    
